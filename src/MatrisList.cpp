@@ -63,6 +63,8 @@ void MatrisList::arithmeticOrder(){
 void MatrisList::print(){
 }
 
+
+
 MatrisList::~MatrisList(){
     ofstream matrisFile;
     matrisFile.open("kayitlar.txt",ios::out);

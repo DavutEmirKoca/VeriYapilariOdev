@@ -34,6 +34,8 @@ public:
     string matrisAsLine();
     //
     bool isEmpty();
+    void switchNodePlaces(int n1Row,int n1Col, int n2Row, int n2Col);
+    void switchRowColumn(int row,int column);
     //destructor: deletes the matris row by row until the matris is empty
     ~Matris();
     

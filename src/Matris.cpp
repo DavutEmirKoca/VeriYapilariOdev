@@ -174,6 +174,44 @@ bool Matris::isEmpty(){
     else return false;
 }
 
+void Matris::switchNodePlaces(int n1Row,int n1Col, int n2Row, int n2Col){
+    if(n1Row>row||n1Row<1||n1Col>column||n1Col<1||n2Row>row||n2Row<1||n2Col>column||n2Col<1) return;
+    int firstNodePos=((n1Row-1)*column)+n1Col-1;
+    int secondNodePos=((n2Row-1)*column)+n2Col-1;
+    Node* firstNode =head;
+    Node* secondNode=head;
+    Node* fPrevNode=head;
+    Node* sPrevNode=head;
+    for(int i=0;i<firstNodePos;i++){
+        if(i==firstNodePos-1) fPrevNode=firstNode;
+        firstNode=firstNode->next;
+    }
+    for(int i=0;i<secondNodePos;i++){
+        if(i==secondNodePos-1) sPrevNode=secondNode;
+        secondNode=secondNode->next;
+    }
+    if(secondNodePos==firstNodePos) return;
+    if(secondNodePos!=0&&firstNodePos!=0){
+    fPrevNode->next=secondNode;
+    Node* tmpNode=firstNode->next;
+    firstNode->next=secondNode->next;
+    sPrevNode->next=firstNode;
+    secondNode->next=tmpNode;
+    }
+    else if(firstNodePos==0){
+        Node* tmpNode=firstNode->next;
+        firstNode->next=secondNode->next;
+        sPrevNode->next=firstNode;
+        secondNode->next=tmpNode;
+        head=secondNode;
+    }
+    return;
+}
+
+void Matris::switchRowColumn(int row,int column){
+
+}
+
 Matris::~Matris(){
     for(int i=1;row>0;){
         deleteRow(i);
