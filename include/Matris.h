@@ -14,7 +14,6 @@ private:
 
 public:
     Matris* next;
-    //
     //constructor: creates a blank matris
     Matris();
     //creates a predetermined matris if parametres are given
@@ -25,16 +24,17 @@ public:
     void print();
     //calculates the arithmetic average of the matris and returns it
     double arithmeticCalculate();
-    //generates a random matris if no values are passed, generates a predetermined matris if values are passed
     //deletes the given row
     void deleteRow(int row);
     //deletes the given column
     void deleteColumn(int column);
-    //inserts the matris to the file
+    //returns matris info as a string
     string matrisAsLine();
-    //
+    //returns if the matris is empty
     bool isEmpty();
+    //switch the given nodes's places
     void switchNodePlaces(int n1Row,int n1Col, int n2Row, int n2Col);
+    //switch the given row and column
     void switchRowColumn(int row,int column);
     //destructor: deletes the matris row by row until the matris is empty
     ~Matris();

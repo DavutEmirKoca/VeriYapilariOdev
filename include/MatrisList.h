@@ -9,8 +9,11 @@ class MatrisList{
     public:
         //constructor: creates a matris list reading the file
         MatrisList();
+        //rearranges the list as arithmetic order
         void arithmeticOrder();
+        //
         void print();
+        //destructor: saves and deletes the matris list
         ~MatrisList();
 };
 
