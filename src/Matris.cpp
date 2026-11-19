@@ -25,6 +25,29 @@ void Matris::print(){
         }
     }
 
+string Matris::getLine(int row,int columnDelete=-1,int rowDelete=-1){
+    int totalCharacter=0;
+    if(head==NULL) {
+        return string(31,' ');
+    };    
+    Node *currentNode = head; 
+    string rowString="";
+    for(int i=0;i<this->column*row;i++){
+        currentNode=currentNode->next;
+    }
+    for(int i=0;i<column;i++){
+        if(i==0) rowString+="  ";
+        if(columnDelete!=i&&i!=0) rowString+=" ";
+        if(columnDelete==i) rowString+="|";
+        rowString+=currentNode->data;
+        if(currentNode->data<10) rowString+=" ";
+        if(columnDelete==i) rowString+="|";
+        currentNode=currentNode->next;
+    }
+    if(totalCharacter<31) rowString+=string(31-totalCharacter,' ');
+    return rowString;
+}
+
 double Matris::arithmeticCalculate()
     {
         int arithmetic = 0;

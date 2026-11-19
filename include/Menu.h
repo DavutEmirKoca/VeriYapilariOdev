@@ -5,8 +5,8 @@
 class Menu{
     private:
         MatrisList* matrisList;
-        // 0 matrisList mode, 1 matris mode
-        bool mode;
+        // 0 dugum gezilimi, 1 dugum islemleri, 2 satir silme, 3 sütun silme
+        int mode;
         string screen;
         //creates the screen with current values
         void screenRefresh();
@@ -18,7 +18,8 @@ class Menu{
         string panels(int row);
         int rowToMatrisIndex(int i);
         //
-        string whiteSpace(int amount);
+        int columnDeleteIndex;
+        int rowDeleteIndex;
         
     public:
         Menu();

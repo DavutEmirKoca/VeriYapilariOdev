@@ -7,11 +7,11 @@
 class MatrisList{
     private:
         Matris* head;
-        Matris* getMatrisAddress(int matrisNo);
         string formatArithmeticAverage(double arithmeticAv);
     public:
         //constructor: creates a matris list reading the file
         MatrisList();
+        Matris* getMatrisAddress(int matrisNo);
         //
         void insertMatrisPrev(Matris*);
         //
