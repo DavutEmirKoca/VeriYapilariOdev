@@ -60,10 +60,91 @@ void MatrisList::arithmeticOrder(){
 }while(isChanged==1);
 }
 
-void MatrisList::print(){
+string MatrisList::getMatrisRow(int matrisNo,int rowNo){
+    Matris* matrisAddress=getMatrisAddress(matrisNo);
+    stringstream ss;
+    switch(rowNo){
+        case 0:
+        case 6:
+            return "********************";
+        case 2:
+        case 4:
+            return "--------------------";
+        case 1:{
+            ss<<matrisAddress;
+            string matrisAddressString=ss.str();
+            return "*   "+matrisAddressString+"    *";
+        }
+        case 3:{
+            double arithmeticAv=matrisAddress->arithmeticCalculate();
+            string formattedArithmeticAverage=formatArithmeticAverage(arithmeticAv);
+            return "*  "+formattedArithmeticAverage+"   *";
+        }
+        case 5:{
+            ss<<matrisAddress->next;
+            string matrisNextAddressString=ss.str();
+            return "*   "+matrisNextAddressString+"    *";
+        }
+        default:
+            return "";
+    }
+    return "";
 }
 
+string MatrisList::formatArithmeticAverage(double arithmeticAv){
+    string formattedArithmeticAverage="";
+    string arithmeticAvString=to_string(arithmeticAv);
+    string leftPart=arithmeticAvString.substr(0,arithmeticAvString.find('.'));
+    string rightPart=arithmeticAvString.erase(0,arithmeticAvString.find('.')).erase(3);
+    int rightPartNum=rightPart.length();
+    int leftPartNum=leftPart.length();
+    int occupiedSpace=leftPartNum+rightPartNum;
+    int leftPartSpace=(13-occupiedSpace)/2;
+    int rightPartSpace=(13-occupiedSpace)-leftPartSpace;
+    for(int i=0;i<leftPartSpace;i++){
+        formattedArithmeticAverage+=" ";
+    }
+    formattedArithmeticAverage+=leftPart+rightPart;
+    for(int i=0;i<rightPartSpace;i++){
+        formattedArithmeticAverage+=" ";
+    }
+    return formattedArithmeticAverage;
+}
 
+Matris* MatrisList::getMatrisAddress(int matrisNo){
+    Matris* matrisAddress=head;
+    int i=0;
+    while(i!=matrisNo){
+        matrisAddress=matrisAddress->next;
+        i++;
+    }
+    return matrisAddress;
+}
+
+void MatrisList::insertMatrisPrev(Matris* currentMatris){
+    Matris* iterator=head;
+    Matris* newMatris= new Matris();
+    newMatris->matrisGenerate();
+    if(currentMatris!=head){
+        while(iterator->next!=currentMatris){
+            iterator=iterator->next;
+        }
+        iterator->next=newMatris;
+        newMatris->next=currentMatris;
+    }
+    else{
+        head=newMatris;
+        newMatris->next=currentMatris;
+    }
+}
+
+void MatrisList::insertMatrisNext(Matris* currentMatris){
+    Matris* newMatris=new Matris();
+    newMatris->matrisGenerate();
+    Matris* currentNext=currentMatris->next;
+    currentMatris->next=newMatris;
+    newMatris->next=currentNext;
+}
 
 MatrisList::~MatrisList(){
     ofstream matrisFile;

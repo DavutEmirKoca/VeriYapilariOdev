@@ -30,12 +30,13 @@ double Matris::arithmeticCalculate()
         int arithmetic = 0;
         Node *currentNode = head;
         int length=0;
-        while (currentNode->next != NULL)
+        while (currentNode!= NULL)
         {
             length++;
             arithmetic += currentNode->data;
             currentNode = currentNode->next;
         }
+        if(length==0) return 0;
         return arithmetic/(double)length;
     }
 void Matris::matrisGenerate()
@@ -92,6 +93,7 @@ void Matris::matrisGenerate(int row, int column, string matris){
     }   
 
 void Matris::deleteRow(int row){
+    row+=1;
     if(row<=0||this->row<row) throw "Row is out of range";
     Node* currentNode=head;
     for(int i=0;i<((row-1)*column-1);i++){
@@ -125,7 +127,8 @@ void Matris::deleteRow(int row){
 }
 
 void Matris::deleteColumn(int column){
-    if(column<0||column>this->column) throw "Column is out of range";
+    column+=1;
+    if(column<=0||column>this->column) throw "Column is out of range";
     Node* currentNode=head;
     for(int j=0;j<column-2;j++){   
             currentNode=currentNode->next;
@@ -175,45 +178,54 @@ bool Matris::isEmpty(){
 }
 
 void Matris::switchNodePlaces(int n1Row,int n1Col, int n2Row, int n2Col){
-    if(n1Row>row||n1Row<1||n1Col>column||n1Col<1||n2Row>row||n2Row<1||n2Col>column||n2Col<1) return;
-    int firstNodePos=((n1Row-1)*column)+n1Col-1;
-    int secondNodePos=((n2Row-1)*column)+n2Col-1;
-    Node* firstNode =head;
+    if(n1Row>=row||n1Row<0||n1Col>=column||n1Col<0||n2Row>=row||n2Row<0||n2Col>=column||n2Col<0) return;
+    int firstNodePos=((n1Row)*column)+n1Col;
+    int secondNodePos=((n2Row)*column)+n2Col;
+    Node* firstNode=head;
     Node* secondNode=head;
-    Node* fPrevNode=head;
-    Node* sPrevNode=head;
     for(int i=0;i<firstNodePos;i++){
-        if(i==firstNodePos-1) fPrevNode=firstNode;
         firstNode=firstNode->next;
     }
     for(int i=0;i<secondNodePos;i++){
-        if(i==secondNodePos-1) sPrevNode=secondNode;
         secondNode=secondNode->next;
     }
-    if(secondNodePos==firstNodePos) return;
-    if(secondNodePos!=0&&firstNodePos!=0){
-    fPrevNode->next=secondNode;
-    Node* tmpNode=firstNode->next;
-    firstNode->next=secondNode->next;
-    sPrevNode->next=firstNode;
-    secondNode->next=tmpNode;
-    }
-    else if(firstNodePos==0){
-        Node* tmpNode=firstNode->next;
-        firstNode->next=secondNode->next;
-        sPrevNode->next=firstNode;
-        secondNode->next=tmpNode;
-        head=secondNode;
-    }
-    return;
+    int tmpData=firstNode->data;
+    firstNode->data=secondNode->data;
+    secondNode->data=tmpData;                                                                       
 }
 
 void Matris::switchRowColumn(int row,int column){
+    if(this->row!=this->column) return;
+    int nodeIntersectionData=getNodeData(((row)*this->column)+column);
+    for(int i=0;i<this->row;i++){
+        if(i!=column){
+            switchNodePlaces(row,i,i,column);
+        }
+        else{
+            insertNodeData((i*this->column)+column,nodeIntersectionData);
+        }
+    }
+}
 
+void Matris::insertNodeData(int nodePlace,int data){
+    Node* currentNode=head;
+    for(int i=0;i<nodePlace;i++){
+        currentNode=currentNode->next;
+    }
+    currentNode->data=data;
+    return;
+}
+
+int Matris::getNodeData(int nodePlace){
+    Node* currentNode=head;
+    for(int i=0;i<nodePlace;i++){
+        currentNode=currentNode->next;
+    }
+    return currentNode->data;
 }
 
 Matris::~Matris(){
-    for(int i=1;row>0;){
+    for(int i=0;row>0;){
         deleteRow(i);
     }
 }

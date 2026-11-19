@@ -11,7 +11,10 @@ private:
     int row;
     int column;
     Node *head;
-
+    //inserts data to given node place
+    void insertNodeData(int nodePlace,int data);
+    //gets the data of given node
+    int getNodeData(int nodePlace);
 public:
     Matris* next;
     //constructor: creates a blank matris
@@ -24,9 +27,9 @@ public:
     void print();
     //calculates the arithmetic average of the matris and returns it
     double arithmeticCalculate();
-    //deletes the given row
+    //deletes the given row 0 based
     void deleteRow(int row);
-    //deletes the given column
+    //deletes the given column 0 based
     void deleteColumn(int column);
     //returns matris info as a string
     string matrisAsLine();
