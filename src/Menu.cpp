@@ -2,6 +2,7 @@
 
 Menu::Menu(){
     matrisList=new MatrisList();  
+    matrisGroup=0;
     columnDeleteIndex=-1;
     rowDeleteIndex=-1;
 }
@@ -9,8 +10,13 @@ Menu::Menu(){
 void Menu::screenRefresh(){
     screen="";
     for(int i=0;i<44;i++){
-        //screen+=matrisList->getMatrisRow(rowToMatrisIndex(i),);
-        matrisList->getMatrisAddress(rowToMatrisIndex(i))->getLine(i,columnDeleteIndex,rowDeleteIndex);
+        screen+=matrisList->getMatrisRow(rowToMatrisIndex(i),rowToMatrisRow(i));
+        //sorunlu satır
+        if(rowToMatrisIndex(i)<0){
+            screen+=string(20,' ');
+        }else{
+            //screen+=matrisList->getMatrisAddress(rowToMatrisIndex(i))->getLine(i,columnDeleteIndex,rowDeleteIndex);
+        }
         screen+=panels(i);
         screen+="\n";
     }
@@ -119,6 +125,16 @@ int Menu::rowToMatrisIndex(int i){
     if(i>=18&&i<=24) return 2+matrisGroup;
     if(i>=26&&i<=34) return 3+matrisGroup;
     if(i>=36&&i<=42) return 4+matrisGroup;
+    return -1;
+}
+
+int Menu::rowToMatrisRow(int row){
+    if(row<2||row%8==1||row>42) return -1;
+    if(row>=2&&row<=8) return row-2;
+    if(row>=10&&row<=16) return row-10;
+    if(row>=18&&row<=24) return row-18;
+    if(row>=26&&row<=34) return row-26;
+    if(row>=36&&row<=42) return row-34;
     return -1;
 }
 

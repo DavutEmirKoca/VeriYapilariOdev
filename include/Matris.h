@@ -39,7 +39,7 @@ public:
     void switchNodePlaces(int n1Row,int n1Col, int n2Row, int n2Col);
     //switch the given row and column
     void switchRowColumn(int row,int column);
-    string getLine(int row,int columnDelete=-1,int rowDelete=-1);
+    string getLine(int row,int columnDelete,int rowDelete);
     //destructor: deletes the matris row by row until the matris is empty
     ~Matris();
     

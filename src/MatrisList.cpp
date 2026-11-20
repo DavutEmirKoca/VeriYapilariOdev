@@ -61,6 +61,8 @@ void MatrisList::arithmeticOrder(){
 }
 
 string MatrisList::getMatrisRow(int matrisNo,int rowNo){
+    if(rowNo==-1) return "";
+    if(matrisNo==-1) return string(20,' ');
     Matris* matrisAddress=getMatrisAddress(matrisNo);
     stringstream ss;
     switch(rowNo){
@@ -86,9 +88,8 @@ string MatrisList::getMatrisRow(int matrisNo,int rowNo){
             return "*   "+matrisNextAddressString+"    *";
         }
         default:
-            return "";
+            return string(20,' ');
     }
-    return "";
 }
 
 string MatrisList::formatArithmeticAverage(double arithmeticAv){
@@ -111,11 +112,12 @@ string MatrisList::formatArithmeticAverage(double arithmeticAv){
     return formattedArithmeticAverage;
 }
 
-Matris* MatrisList::getMatrisAddress(int matrisNo){
-    Matris* matrisAddress=head;
-    int i=0;
-    while(i!=matrisNo){
-        matrisAddress=matrisAddress->next;
+Matris* MatrisList::getMatrisAddress(int matrisNo) {
+    if (matrisNo < 0) return NULL;
+    Matris* matrisAddress = head;
+    int i = 0;
+    while (i != matrisNo && matrisAddress != NULL) {
+        matrisAddress = matrisAddress->next;
         i++;
     }
     return matrisAddress;

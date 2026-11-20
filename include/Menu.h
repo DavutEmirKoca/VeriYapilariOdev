@@ -17,6 +17,7 @@ class Menu{
         //the right menu
         string panels(int row);
         int rowToMatrisIndex(int i);
+        int rowToMatrisRow(int row);
         //
         int columnDeleteIndex;
         int rowDeleteIndex;

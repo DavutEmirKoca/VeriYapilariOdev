@@ -26,10 +26,11 @@ void Matris::print(){
     }
 
 string Matris::getLine(int row,int columnDelete=-1,int rowDelete=-1){
+
     int totalCharacter=0;
-    if(head==NULL) {
+    if(head==NULL||row<0||row>this->row) {
         return string(31,' ');
-    };    
+    }   
     Node *currentNode = head; 
     string rowString="";
     for(int i=0;i<this->column*row;i++){
