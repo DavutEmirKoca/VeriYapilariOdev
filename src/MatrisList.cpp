@@ -62,33 +62,34 @@ void MatrisList::arithmeticOrder(){
 
 string MatrisList::getMatrisRow(int matrisNo,int rowNo){
     if(rowNo==-1) return "";
-    if(matrisNo==-1) return string(20,' ');
+    if(matrisNo==-1) return string(21,' ');
     Matris* matrisAddress=getMatrisAddress(matrisNo);
     stringstream ss;
     switch(rowNo){
         case 0:
         case 6:
-            return "********************";
+            return "******************** ";
         case 2:
         case 4:
-            return "--------------------";
+            return "-------------------- ";
         case 1:{
             ss<<matrisAddress;
             string matrisAddressString=ss.str();
-            return "*   "+matrisAddressString+"    *";
+            return "*   "+matrisAddressString+"    * ";
         }
         case 3:{
             double arithmeticAv=matrisAddress->arithmeticCalculate();
             string formattedArithmeticAverage=formatArithmeticAverage(arithmeticAv);
-            return "*  "+formattedArithmeticAverage+"   *";
+            return "*  "+formattedArithmeticAverage+"   * ";
         }
         case 5:{
             ss<<matrisAddress->next;
             string matrisNextAddressString=ss.str();
-            return "*   "+matrisNextAddressString+"    *";
+            if(matrisNextAddressString=="0") return "*        0         * ";
+            return "*   "+matrisNextAddressString+"    * ";
         }
         default:
-            return string(20,' ');
+            return string(21,' ');
     }
 }
 

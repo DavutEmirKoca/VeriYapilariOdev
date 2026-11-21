@@ -18,6 +18,7 @@ class Menu{
         string panels(int row);
         int rowToMatrisIndex(int i);
         int rowToMatrisRow(int row);
+        void controls();
         //
         int columnDeleteIndex;
         int rowDeleteIndex;
@@ -25,6 +26,7 @@ class Menu{
     public:
         Menu();
         void printScreen();
+        ~Menu();
     
 };
 

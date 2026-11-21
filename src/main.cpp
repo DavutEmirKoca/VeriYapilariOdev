@@ -5,5 +5,6 @@ using namespace std;
 int main()
 {
     Menu* m=new Menu();
-    m->printScreen();
+    delete m;
+    return 0;
 }

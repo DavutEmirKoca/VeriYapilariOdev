@@ -21,7 +21,6 @@ class MatrisList{
         //
         void print();
         string getMatrisRow(int matrisNo,int rowNo);
-        
         //destructor: saves and deletes the matris list
         ~MatrisList();
 };
